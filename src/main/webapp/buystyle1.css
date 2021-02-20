@@ -1,0 +1,86 @@
+
+/* Advanced Checkbox Hack */
+
+/* 
+ * pseudo-class + general/adjacent sibling doesn't work
+ * on Android <= 4.1.2 so we need a hack:
+ *
+ * A useless animation :D
+ */
+body {
+  -webkit-animation: bugfix infinite 1s;
+  margin:1em;
+  font: 1em lato;
+}
+@-webkit-keyframes bugfix {
+  from {
+    padding:0;
+  }
+  to {
+    padding:0;
+  }
+}
+
+div.l-container{
+  width:35em;
+  background:white;
+}
+div.l-container input[type=checkbox] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+}
+
+div.l-container label {
+    border: 3px solid #ca9827;
+    cursor: pointer;
+    display:inline-block;
+    padding:0.5em 1.5em;
+    float:right;
+    color:#ca9827;
+    border-radius:0.6em;
+}
+
+div.l-container .other {
+   color: black;
+   text-align: center;
+} 
+div.l-container .other span.search{
+  display:none;
+}
+div.l-container .other span{
+  line-height:2em;
+  font-size:1.1em;
+}
+/* checked */
+div.l-container input[type=checkbox]:checked ~ div.other .pay {
+   display:none;
+}
+div.l-container input[type=checkbox]:checked ~ div.other .search {
+  display:inline;
+}
+div.l-container input:checked ~ label span{
+  opacity:0;
+}
+div.l-container input:checked ~ label{
+  cursor: auto;
+  background-image: 
+    repeating-linear-gradient(
+      -45deg,
+      #CA982799,
+      #CA982799 11px,
+      #eee 10px,
+      #eee 20px /* determines size */
+    );
+  background-size: 28px 28px;
+  animation: move .5s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  } 
+  100% {
+    background-position: 28px 0;
+  } 
+}
